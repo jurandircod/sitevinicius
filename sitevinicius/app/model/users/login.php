@@ -27,11 +27,9 @@
             $_SESSION['nome'] = $usuario['nome'];
             $_SESSION['permissoes'] = $usuario['permissoes'];
 
-            if ($_SESSION['permissoes'] == 1) {
+            if ($_SESSION['permissoes'] == 1 || $_SESSION['permissoes'] == 2) {
                 header('location: /sitevinicius/index.php');
-            } elseif ($_SESSION['permissoes'] == 2) {
-                header('location: ../../view/panels/painelAdministrador.php');
-            }
+            } 
         } else {
             include('../../controller/errors/errosClass.php');
             $erroAgendar = new PainelDeErro($mensagensDeErro[4]['mensagem'], $mensagensDeErro[4]['tipo']);
