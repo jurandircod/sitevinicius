@@ -1,5 +1,9 @@
 <?php
-if (isset($_SESSION['id'])) {
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (!isset($_SESSION['id'])) {
     header('location: login.php');
     //header('location: app/view/panels/painel_administrador.php');
 }
@@ -25,16 +29,16 @@ if (isset($_SESSION['id'])) {
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed dark-mode" data-panel-auto-height-mode="height">
-    <div class="wrapper">
 
-        <nav class="main-header navbar navbar-expand navbar-dark fixed-top">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-light">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Inicio</a>
+                    <a href="index.php" class="nav-link">Inicio</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contatos</a>
@@ -88,58 +92,101 @@ if (isset($_SESSION['id'])) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
+                    <a class="nav-link" href="app/controller//logout.php">
+                        <i class="fa-regular fa-user" href="app/controller//logout.php"></i> Sair
                     </a>
                 </li>
             </ul>
         </nav>
 
 
-        <?php
-        if (isset($_SESSION['id']) && $_SESSION['permissoes'] == 2) {
-            include("app/view/panels/painel_administrador.php");
-        }
-        ?>
+        <!-- conteudo interno -->
+        <div class="content-wrapper">
+            <header>
+                <?php
+
+                switch ((@$_REQUEST['page'])) {
+                    case 'userListar':
+                        include("app/view/users/usersListar.php");
+                        break;
+                    case 'agendar':
+                        include('app/view/agendar_cards.php');
+                        break;
+                    default:
+                        include("app/view/users/usersListar.php");
+                }
 
 
-        <div class="content-wrapper  " data-widget="iframe" data-auto-dark-mode="true" data-loading-screen="750">
+                ?>
+            </header>
+        </div>
+    </div>
+    <!-- barra lateral de ferramentas -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="index3.html" class="brand-link">
+            <img src="https://www.umuarama.pr.gov.br/img/logoumuaramaBranco.svg" alt="Umuarama Logo" class="brand-image " style="opacity: .8">
+            <span class="brand-text font-weight-light"><br></span>
+        </a>
 
-            <div class="tab-content mt-3">
-                <div class="tab-empty">
-                    <?php include('../sitevinicius/app/view/agendar_cards.php');
-                    ?>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <!--<img src="" class="img-circle elevation-2" alt="User Image">-->
+                </div>
+                <div class="info">
+                    <i class="fa-regular fa-user"></i> <a href="#" class="">Administrador</a>
+                </div>
+
+            </div>
+
+            <!-- SidebarSearch Form -->
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
+            <!--verificar se é o adiminstrador que está logado-->
+            <?php
+            if (isset($_SESSION['id']) && $_SESSION['permissoes'] == 2) {
+                include("app/view/users/ferramentasAdministrador.php");
+            }
+            ?>
         </div>
+    </aside>
+
+    <footer class="main-footer dark-mode fixed-bottom">
+        <strong>Copyright &copy; 2014-2021 <a href="">Prefeitura de Umuarama</a>.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 1.0
+        </div>
+    </footer>
+    
 
 
-
-        <footer class="main-footer dark-mode fixed-bottom">
-            <strong>Copyright &copy; 2014-2021 <a href="">Prefeitura de Umuarama</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0
-            </div>
-        </footer>
-
-
-
-        <script src="public/plugins/jquery/jquery.min.js"></script>
-        <!-- jQuery UI 1.11.4 -->
-        <script src="public/plugins/jquery-ui/jquery-ui.min.js"></script>
-        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <script>
-            $.widget.bridge('uibutton', $.ui.button);
-        </script>
-        <!-- Bootstrap 4 -->
-        <script src="public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- overlayScrollbars -->
-        <script src="public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="public/js/adminlte.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="public/js/demo.js"></script>
+    <script src="public/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="public/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="public/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="public/js/demo.js"></script>
 
 </body>
