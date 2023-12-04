@@ -25,7 +25,10 @@ if (!isset($_SESSION['id'])) {
     <!--icons fontwelsome -->
     <link rel="stylesheet" href="public/fontawesome/fontawesome-free-6.4.2-web/css/all.min.css">
     <!-- cards -->
-    <link rel="stylesheet" href="public/css//cards.css">
+    <link rel="stylesheet" href="public/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="public/plugins/toastr/toastr.min.css">
+    
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed dark-mode" data-panel-auto-height-mode="height">
@@ -105,6 +108,7 @@ if (!isset($_SESSION['id'])) {
             <header>
                 <?php
 
+
                 switch ((@$_REQUEST['page'])) {
                     case 'userListar':
                         include("app/view/users/usersListar.php");
@@ -112,12 +116,22 @@ if (!isset($_SESSION['id'])) {
                     case 'agendar':
                         include('app/view/agendar_cards.php');
                         break;
+                    case 'usuario':
+                        include('app/view/users/painelUsuario.php');
+                        break;
                     default:
                         include("app/view/users/usersListar.php");
+                    break;
                 }
-
-
                 ?>
+
+                <footer class="main-footer dark-mode fixed-bottom ">
+                    <strong>Copyright &copy; 2014-2021 <a href="">Prefeitura de Umuarama</a>.</strong>
+                    All rights reserved.
+                    <div class="float-right d-none d-sm-inline-block">
+                        <b>Version</b> 1.0
+                    </div>
+                </footer>
             </header>
         </div>
     </div>
@@ -137,7 +151,7 @@ if (!isset($_SESSION['id'])) {
                     <!--<img src="" class="img-circle elevation-2" alt="User Image">-->
                 </div>
                 <div class="info">
-                    <i class="fa-regular fa-user"></i> <a href="#" class="">Administrador</a>
+                    <i class="fa-regular fa-user"></i> <a href="index.php?page=usuario" class="">Administrador</a>
                 </div>
 
             </div>
@@ -163,14 +177,8 @@ if (!isset($_SESSION['id'])) {
         </div>
     </aside>
 
-    <footer class="main-footer dark-mode fixed-bottom">
-        <strong>Copyright &copy; 2014-2021 <a href="">Prefeitura de Umuarama</a>.</strong>
-        All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 1.0
-        </div>
-    </footer>
-    
+
+
 
 
     <script src="public/plugins/jquery/jquery.min.js"></script>
@@ -188,5 +196,73 @@ if (!isset($_SESSION['id'])) {
     <script src="public/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="public/js/demo.js"></script>
+    <script src="public/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="public/plugins/toastr/toastr.min.js"></script>
 
 </body>
+
+<?php
+if (isset($_GET['sucess'])) {
+    // Cria um bloco de script JavaScript que mostra a notificação de sucesso
+    echo "<script>
+            $(function() {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Usuário excluído com sucesso'
+                });
+            });
+
+            window.history.replaceState({}, document.title, window.location.pathname);
+        </script>";
+}
+?>
+
+<script>
+  $(function() {
+    var Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+
+    $('.swalDefaultSuccess').click(function() {
+      Toast.fire({
+        icon: 'success',
+        title: 'Usuário excluido com sucesso'
+      })
+    });
+    $('.swalDefaultInfo').click(function() {
+      Toast.fire({
+        icon: 'info',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultError').click(function() {
+      Toast.fire({
+        icon: 'error',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultWarning').click(function() {
+      Toast.fire({
+        icon: 'warning',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultQuestion').click(function() {
+      Toast.fire({
+        icon: 'question',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+  });
+</script>
