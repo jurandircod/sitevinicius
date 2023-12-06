@@ -4,8 +4,7 @@ if (!isset($_SESSION)) {
 }
 
 if (!isset($_SESSION['id'])) {
-    header('location: login.php');
-    //header('location: app/view/panels/painel_administrador.php');
+    die("você precisa estar logado para excluir <a href='/sitevinicius/login.php'> voltar para o inicio</a>");
 }
 ?>
 
@@ -28,7 +27,8 @@ if (!isset($_SESSION['id'])) {
     <link rel="stylesheet" href="public/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="public/plugins/toastr/toastr.min.css">
-    
+    <link rel="shortcut icon" href="https://www.umuarama.pr.gov.br/img/logorodape.svg" type="image/x-icon">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed dark-mode" data-panel-auto-height-mode="height">
@@ -117,11 +117,11 @@ if (!isset($_SESSION['id'])) {
                         include('app/view/agendar_cards.php');
                         break;
                     case 'usuario':
-                        include('app/view/users/painelUsuario.php');
+                        include("app/view/users/usersListar.php");
                         break;
                     default:
-                        include("app/view/users/usersListar.php");
-                    break;
+                        include('app/view/users/painelUsuario.php');
+                        break;
                 }
                 ?>
 
@@ -151,7 +151,7 @@ if (!isset($_SESSION['id'])) {
                     <!--<img src="" class="img-circle elevation-2" alt="User Image">-->
                 </div>
                 <div class="info">
-                    <i class="fa-regular fa-user"></i> <a href="index.php?page=usuario" class="">Administrador</a>
+                    <i class="fa-regular fa-user"></i> <a href="index.php?page=usuario" class=""><?php echo $_SESSION['nome'] ?></a>
                 </div>
 
             </div>
@@ -226,43 +226,43 @@ if (isset($_GET['sucess'])) {
 ?>
 
 <script>
-  $(function() {
-    var Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
+    $(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
 
-    $('.swalDefaultSuccess').click(function() {
-      Toast.fire({
-        icon: 'success',
-        title: 'Usuário excluido com sucesso'
-      })
+        $('.swalDefaultSuccess').click(function() {
+            Toast.fire({
+                icon: 'success',
+                title: 'Usuário excluido com sucesso'
+            })
+        });
+        $('.swalDefaultInfo').click(function() {
+            Toast.fire({
+                icon: 'info',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+        $('.swalDefaultError').click(function() {
+            Toast.fire({
+                icon: 'error',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+        $('.swalDefaultWarning').click(function() {
+            Toast.fire({
+                icon: 'warning',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+        $('.swalDefaultQuestion').click(function() {
+            Toast.fire({
+                icon: 'question',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
     });
-    $('.swalDefaultInfo').click(function() {
-      Toast.fire({
-        icon: 'info',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultError').click(function() {
-      Toast.fire({
-        icon: 'error',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultWarning').click(function() {
-      Toast.fire({
-        icon: 'warning',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultQuestion').click(function() {
-      Toast.fire({
-        icon: 'question',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-  });
 </script>

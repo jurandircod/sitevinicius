@@ -1,4 +1,7 @@
 <?php
+if($_SESSION['id'] == 2 ){
+    die("você precisa estar logado para excluir <a href='sitevinicius/index.php'> voltar para o inicio</a>");
+}
 
 include( __DIR__. '/../../config/config.php');
 if(isset($_GET['id'])){
