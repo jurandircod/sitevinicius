@@ -119,6 +119,9 @@ if (!isset($_SESSION['id'])) {
                     case 'usuario':
                         include("app/view/users/usersListar.php");
                         break;
+                    case 'cadsetor':
+                        include("app/view/gerencia/cadastrarSetor.php");
+                        break;
                     default:
                         include('app/view/users/painelUsuario.php');
                         break;
@@ -151,7 +154,7 @@ if (!isset($_SESSION['id'])) {
                     <!--<img src="" class="img-circle elevation-2" alt="User Image">-->
                 </div>
                 <div class="info">
-                    <i class="fa-regular fa-user"></i> <a href="index.php?page=usuario" class=""><?php echo $_SESSION['nome'] ?></a>
+                    <i class="fa-regular fa-user"></i> <a href="index.php" class=""><?php echo $_SESSION['nome'] ?></a>
                 </div>
 
             </div>

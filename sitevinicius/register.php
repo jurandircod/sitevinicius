@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+$invalidSenha = (isset($_GET['errorSenha'])) ? "is-invalid" : "";
+$invalidEmail = (isset($_GET['errorEmail'])) ? "is-invalid" : "";
+?>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Registration Page (v2)</title>
+  <title>Agendamentos</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -14,21 +19,25 @@
   <link rel="stylesheet" href="public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="public/css/adminlte.min.css">
+  <link rel="stylesheet" href="public/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="public/plugins/toastr/toastr.min.css">
+  <link rel="shortcut icon" href="https://www.umuarama.pr.gov.br/img/logorodape.svg" type="image/x-icon">
 </head>
 
 <body class="hold-transition register-page">
-  <div class="register-box">
-    <div class="card card-outline card-primary">
+  <div class="register-box ">
+    <div class="card card-outline card-primary ">
       <div class="card-header text-center">
         <a href="../../index2.html" class="h1"><b>Prefeitura</b> <br>de umuarama</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Registrar novo usuario</p>
 
-        <form class="myform" action="app/model//users//cadastrar.php" method="post">
+        <form class="myform " action="app/model//users//cadastrar.php" method="post">
           <div class="input-group mb-3">
 
-            <input type="text" class="form-control" name="nome" placeholder="Nome completo">
+            <input type="text" class="form-control" required minlength="2" name="nome" placeholder="Nome completo*">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -37,7 +46,7 @@
           </div>
           <div class="input-group mb-3">
 
-            <input type="email" class="form-control" name="email" placeholder="Email">
+            <input type="email" class="form-control <?php echo $invalidEmail ?>" name="email" placeholder="Email*">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -46,9 +55,8 @@
           </div>
 
           <div class="input-group mb-3">
-            <select name="sec" id="" class="form-control" placeholder="setores">
-              <option selected>Secretaria responsável</option>
-              <option value="RH">Secretaria de administração</option>
+            <select name="secretaria" required minlength="3" class="form-control">
+              <option value="" selected>Selecione a secretaria*</option>
               <option value="RH">Secrtária de saúde</option>
               <option value="RH">Secretária dos conselhos</option>
               <option value="RH">RH</option>
@@ -63,7 +71,7 @@
 
           <div class="row">
             <div class="input-group mb-3 col">
-              <input type="tel" class="form-control" name="tel" placeholder="telefone">
+              <input type="tel" pattern="[0-9()+\-]*" title="Apenas números são permitidos" class="form-control" name="tel" required minlength="6" placeholder="telefone*">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-phone">
@@ -73,8 +81,8 @@
             </div>
 
             <div class="input-group mb-3 col">
-              <select name="setor" id="" class="form-control" placeholder="setores">
-                <option selected>Seu setor</option>
+              <select required minlength="3" name="setor" class="form-control">
+                <option value="" selected>Setor*</option>
                 <option value="RH"></option>
                 <option value="RH">projetos técnicos</option>
                 <option value="RH">RH</option>
@@ -91,7 +99,7 @@
           </div>
 
           <div class="input-group mb-3">
-            <input type="password" class="form-control" name="senha" placeholder="Senha">
+            <input type="password" class="form-control" required minlength="4" name="senha" placeholder="Senha*">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -99,7 +107,8 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" name="confirm" class="form-control" placeholder="Digite sua senha novamente">
+
+            <input type="password" name="confirm" required minlength="4" class="form-control <?php echo $invalidSenha ?>" placeholder="Digite sua senha novamente*">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -149,7 +158,83 @@
   <script src="public/dist/js/adminlte.min.js"></script>
   <script src="public/js//inputs//validaderInputs.js"></script>
 
+  <script src="public/plugins/sweetalert2/sweetalert2.min.js"></script>
+  <!-- Toastr -->
+  <script src="public/plugins/toastr/toastr.min.js"></script>
 
+  <style>
+    .input-erro {
+      border: 1px solid red;
+    }
+  </style>
+
+  <!-- Mostrar Erros  -->
+  <?php
+  if (isset($_GET['sucess'])) {
+    // Cria um bloco de script JavaScript que mostra a notificação de sucesso
+    echo "<script>
+            $(function() {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Cadastro realizado com sucesso'
+                });
+            });
+
+            window.history.replaceState({}, document.title, window.location.pathname);
+        </script>";
+  }
+
+  if (isset($_GET['errorEmail'])) {
+    // Cria um bloco de script JavaScript que mostra a notificação de sucesso
+    echo "<script>
+            $(function() {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Erro email já esta cadastrado'
+                });
+            });
+
+            window.history.replaceState({}, document.title, window.location.pathname);
+        </script>";
+  }
+
+  if (isset($_GET['errorSenha'])) {
+    // Cria um bloco de script JavaScript que mostra a notificação de sucesso
+    echo "<script>
+            $(function() {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 5000
+                });
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'As senhas devem ser iguais'
+                });
+            });
+
+            window.history.replaceState({}, document.title, window.location.pathname);
+        </script>";
+  }
+
+  
+  ?>
 
 
 </body>

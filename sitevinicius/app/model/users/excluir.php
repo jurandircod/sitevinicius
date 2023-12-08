@@ -21,14 +21,14 @@ if(isset($_GET['id'])){
     $sql_query = "DELETE FROM tb_usuarios WHERE id = $idUser";
     if ($conn->query($sql_query)) {
         echo "Registro excluído com sucesso.";
-        header("Location: ../../../index.php?sucess=1");
+        header("Location: ../../../index.php?page=userListar&sucess=1");
     } else {
         echo "Erro ao excluir o registro.";
         echo "Erro: " . $conn->error; // Exibe informações sobre o erro, se houver
     }
 
 } else {
-    echo "ID não recebido.";
+    echo "ID não recebido. entre em contato com administrador do sistema";
 }
 
 ?>
