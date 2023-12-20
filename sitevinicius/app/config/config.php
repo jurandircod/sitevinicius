@@ -3,7 +3,7 @@
 @define("HOST", "localhost");
 @define("USER", "root");
 @define("PASSWD", ""); // lembrar de mudar a psswd no ubuntu
-@define("DBname", "agendamentos");
+@define("DBname", "dbagendamentos");
 
 $conn = new mysqli(HOST, USER, PASSWD, DBname); //conecta ao banco de dados.
 

@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . '/../../config/config.php');
 
-$sql_query = "SELECT * FROM tb_usuarios";
+$sql_query = "SELECT * FROM tbusuario";
 $result = $conn->query($sql_query);
 
 
@@ -39,9 +39,9 @@ $result = $conn->query($sql_query);
                     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
                         <div class="card bg-light d-flex flex-fill">
                             <div class="card-header text-muted border-bottom-0">
-                                <?php if ($agendamentos['permissoes'] == 1) {
+                                <?php if ($agendamentos['nivelPermissao'] == 1) {
                                     echo 'Usuario';
-                                } elseif ($agendamentos['permissoes'] == 2) {
+                                } elseif ($agendamentos['nivelPermissao'] == 2) {
                                     echo 'Administrador';
                                 } ?>
                             </div>
@@ -65,7 +65,7 @@ $result = $conn->query($sql_query);
                                     <a href="index.php?page=alterarPerfil" class="btn btn-sm btn-warning">
                                         <i class="fas fa-comments"></i>Alterar perfil
                                     </a>
-                                    <a onclick="confirmarExclusao(<?php echo $agendamentos['id']; ?>)" class="btn btn-sm btn-danger">
+                                    <a onclick="confirmarExclusao(<?php echo $agendamentos['codigo']; ?>)" class="btn btn-sm btn-danger">
                                         <i class="fas fa-comments"></i>Excluir perfil
                                     </a>
                                     <a href="index.php?page=verPerfil" class="btn btn-sm btn-primary">

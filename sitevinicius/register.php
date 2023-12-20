@@ -2,8 +2,12 @@
 <html lang="en">
 
 <?php
+//deixa os campos vermelhos quando retorna um erro
 $invalidSenha = (isset($_GET['errorSenha'])) ? "is-invalid" : "";
 $invalidEmail = (isset($_GET['errorEmail'])) ? "is-invalid" : "";
+
+$sqlSetor ="SELECT * FROM tbsetor";
+$$sqlSecretaria = "SELECT * FROM tbsecretaria";
 ?>
 
 <head>

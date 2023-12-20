@@ -31,7 +31,7 @@
              </a>
            </li>
            <li class="nav-item">
-             <a href="pages/UI/icons.html" class="nav-link">
+             <a href="index.php?page=cadsec" class="nav-link">
                <i class="far nav-icon"></i>
                <p>Cadastrar Secretaria</p>
              </a>

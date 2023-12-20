@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['codigo'])) {
     die("você precisa estar logado para excluir <a href='/sitevinicius/login.php'> voltar para o inicio</a>");
 }
 ?>
@@ -122,6 +122,9 @@ if (!isset($_SESSION['id'])) {
                     case 'cadsetor':
                         include("app/view/gerencia/cadastrarSetor.php");
                         break;
+                    case 'cadsec':
+                        include("app/view/gerencia/cadastrarSecretaria.php");
+                        break;
                     default:
                         include('app/view/users/painelUsuario.php');
                         break;
@@ -173,7 +176,7 @@ if (!isset($_SESSION['id'])) {
 
             <!--verificar se é o adiminstrador que está logado-->
             <?php
-            if (isset($_SESSION['id']) && $_SESSION['permissoes'] == 2) {
+            if ($_SESSION['nivelPermissao'] == 2) {
                 include("app/view/users/ferramentasAdministrador.php");
             }
             ?>
