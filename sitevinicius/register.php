@@ -7,7 +7,7 @@ $invalidSenha = (isset($_GET['errorSenha'])) ? "is-invalid" : "";
 $invalidEmail = (isset($_GET['errorEmail'])) ? "is-invalid" : "";
 
 $sqlSetor ="SELECT * FROM tbsetor";
-$$sqlSecretaria = "SELECT * FROM tbsecretaria";
+$sqlSecretaria = "SELECT * FROM tbsecretaria";
 ?>
 
 <head>

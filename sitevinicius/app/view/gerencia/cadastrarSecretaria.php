@@ -1,3 +1,11 @@
+<?php
+include('app/config/config.php');
+
+$sqlSec = "SELECT * FROM tbsecretaria";
+$resultSec = $conn->query($sqlSec);
+
+
+?>
 <section class="content">
     <h1 class="text-center mb-4 mt-3">Cadastrar secretaria</h1>
     <form action="../../sitevinicius/app/model/secretaria/cadastrar.php" method="get" class="form">
@@ -22,153 +30,44 @@
 
         <div class="card-body pb-0">
             <div class="row">
-                <!-- cards-->
-                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-                    <div class="card bg-light d-flex flex-fill">
-                        <div class="card-header text-muted border-bottom-0">
 
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="lead"><b>Secretaria de Saude</b></h2>
-                                    <p class="text-muted text-sm"><b>Sobre: </b></p>
-                                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <li class="small"><span class="fa-li"><i
-                                                    class="fas fa-lg fa-building"></i></span> Email: </li>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                                            Phone #: + 800 - 12 12 23 52</li>
-                                    </ul>
-                                </div>
+                <?php while ($seclist = $resultSec->fetch_assoc()) : ?>
+                    <!-- cards-->
+                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                        <div class="card bg-light d-flex flex-fill">
+                            <div class="card-header text-muted border-bottom-0">
 
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-right">
-                                <a href="index.php?page=alterarPerfil" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-comments"></i>Alterar perfil
-                                </a>
-                                <a class="btn btn-sm btn-danger">
-                                    <i class="fas fa-comments"></i>Excluir perfil
-                                </a>
-                                <a href="index.php?page=verPerfil" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> Ver perfil
-                                </a>
+                            <div class="card-body pt-0">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="lead"><b><?php echo $seclist['nome']; ?></b></h2>
+                                        <p class="text-muted text-sm"><b>Sobre: </b></p>
+                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Email: </li>
+                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
+                                                Phone #: + 800 - 12 12 23 52</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-right">
+                                    <a href="index.php?page=alterarPerfil" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-comments"></i>Alterar perfil
+                                    </a>
+                                    <a class="btn btn-sm btn-danger">
+                                        <i class="fas fa-comments"></i>Excluir perfil
+                                    </a>
+                                    <a href="index.php?page=verPerfil" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-user"></i> Ver perfil
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-                    <div class="card bg-light d-flex flex-fill">
-                        <div class="card-header text-muted border-bottom-0">
-
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="lead"><b>Secretaria de Saude</b></h2>
-                                    <p class="text-muted text-sm"><b>Sobre: </b></p>
-                                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <li class="small"><span class="fa-li"><i
-                                                    class="fas fa-lg fa-building"></i></span>
-                                            Email: </li>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                                            Phone #: + 800 - 12 12 23 52</li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-right">
-                                <a href="index.php?page=alterarPerfil" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-comments"></i>Alterar perfil
-                                </a>
-                                <a class="btn btn-sm btn-danger">
-                                    <i class="fas fa-comments"></i>Excluir perfil
-                                </a>
-                                <a href="index.php?page=verPerfil" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> Ver perfil
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-                    <div class="card bg-light d-flex flex-fill">
-                        <div class="card-header text-muted border-bottom-0">
-
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="lead"><b>Secretaria de Saude</b></h2>
-                                    <p class="text-muted text-sm"><b>Sobre: </b></p>
-                                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <li class="small"><span class="fa-li"><i
-                                                    class="fas fa-lg fa-building"></i></span>
-                                            Email: </li>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                                            Phone #: + 800 - 12 12 23 52</li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-right">
-                                <a href="index.php?page=alterarPerfil" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-comments"></i>Alterar perfil
-                                </a>
-                                <a class="btn btn-sm btn-danger">
-                                    <i class="fas fa-comments"></i>Excluir perfil
-                                </a>
-                                <a href="index.php?page=verPerfil" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> Ver perfil
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-                    <div class="card bg-light d-flex flex-fill">
-                        <div class="card-header text-muted border-bottom-0">
-
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="lead"><b>Secretaria de Saude</b></h2>
-                                    <p class="text-muted text-sm"><b>Sobre: </b></p>
-                                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <li class="small"><span class="fa-li"><i
-                                                    class="fas fa-lg fa-building"></i></span>
-                                            Email: </li>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                                            Phone #: + 800 - 12 12 23 52</li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-right">
-                                <a href="index.php?page=alterarPerfil" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-comments"></i>Alterar perfil
-                                </a>
-                                <a class="btn btn-sm btn-danger">
-                                    <i class="fas fa-comments"></i>Excluir perfil
-                                </a>
-                                <a href="index.php?page=verPerfil" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> Ver perfil
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endwhile; ?>
             </div>
 
 

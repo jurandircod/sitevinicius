@@ -26,13 +26,13 @@
          <ul class="nav nav-treeview">
            <li class="nav-item">
              <a href="index.php?page=cadsetor" class="nav-link">
-               <i class="far nav-icon"></i>
+             <i class="bi bi-building-fill-add"></i>
                <p>Cadastrar setor</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="index.php?page=cadsec" class="nav-link">
-               <i class="far nav-icon"></i>
+             <i class="bi bi-bank"></i>
                <p>Cadastrar Secretaria</p>
              </a>
            </li>

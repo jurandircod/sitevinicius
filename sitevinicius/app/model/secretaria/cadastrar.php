@@ -13,7 +13,7 @@ if (isset($nomeSecretaria)) {
         $stmt->bind_param('s', $nomeSecretaria);
 
         if ($stmt->execute()) {
-            header("Location: /sitevinicius/index.php?sucessSetor=1");
+            header("Location: /sitevinicius/index.php?page=cadsec&sucessSetor=1");
         } else {
             echo "Erro ao registrar o usuário: " . $stmt->error;
         }
